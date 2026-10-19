@@ -13,6 +13,8 @@ htmlcov/
 .idea/
 .vscode/
 .DS_Store
+.claude/
+info/
 
 # 原始课程资料（版权/隐私，禁止提交）
 *.ppt
@@ -20,7 +22,3 @@ htmlcov/
 *.pdf
 *.doc
 *.docx
-
-# 本地文档与 Claude Code 配置（不公开）
-info/
-.claude/
