@@ -24,9 +24,11 @@ def process_document(document_id: int, job_id: int | None = None) -> None:
 
         job = db.get(Job, job_id) if job_id else None
         document.status = "processing"
+        document.error = None
         if job is not None:
             job.status = "processing"
             job.stage = "parse"
+            job.error = None
             job.started_at = _now()
         db.commit()
 

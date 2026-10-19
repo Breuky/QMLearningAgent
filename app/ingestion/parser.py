@@ -33,27 +33,34 @@ def _parse_text(path: Path) -> list[ParsedPage]:
     return [ParsedPage(page=1, title=title, text=text)]
 
 
+def _collect_shape_text(shapes, parts: list[str], group_type) -> None:
+    for shape in shapes:
+        if getattr(shape, "has_text_frame", False):
+            text = shape.text_frame.text.strip()
+            if text:
+                parts.append(text)
+        if getattr(shape, "has_table", False):
+            rows = []
+            for row in shape.table.rows:
+                cells = [cell.text.strip() for cell in row.cells]
+                rows.append(" | ".join(cells))
+            table_text = "\n".join(rows).strip()
+            if table_text:
+                parts.append(table_text)
+        if shape.shape_type == group_type:
+            _collect_shape_text(shape.shapes, parts, group_type)
+
+
 def _parse_pptx(path: Path) -> list[ParsedPage]:
     from pptx import Presentation
+    from pptx.enum.shapes import MSO_SHAPE_TYPE
 
     presentation = Presentation(str(path))
     pages: list[ParsedPage] = []
 
     for index, slide in enumerate(presentation.slides, start=1):
         parts: list[str] = []
-        for shape in slide.shapes:
-            if getattr(shape, "has_text_frame", False):
-                text = shape.text_frame.text.strip()
-                if text:
-                    parts.append(text)
-            if getattr(shape, "has_table", False):
-                rows = []
-                for row in shape.table.rows:
-                    cells = [cell.text.strip() for cell in row.cells]
-                    rows.append(" | ".join(cells))
-                table_text = "\n".join(rows).strip()
-                if table_text:
-                    parts.append(table_text)
+        _collect_shape_text(slide.shapes, parts, MSO_SHAPE_TYPE.GROUP)
 
         if slide.has_notes_slide:
             notes = slide.notes_slide.notes_text_frame.text.strip()
@@ -65,8 +72,11 @@ def _parse_pptx(path: Path) -> list[ParsedPage]:
             continue
 
         title = None
-        if slide.shapes.title is not None and slide.shapes.title.text.strip():
-            title = slide.shapes.title.text.strip()
+        title_shape = slide.shapes.title
+        if title_shape is not None and getattr(title_shape, "has_text_frame", False):
+            title_text = title_shape.text_frame.text.strip()
+            if title_text:
+                title = title_text
         pages.append(ParsedPage(page=index, title=title, text=text))
 
     if not pages:
