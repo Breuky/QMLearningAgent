@@ -1,0 +1,26 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+data/
+chroma/
+*.sqlite3
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.idea/
+.vscode/
+.DS_Store
+
+# 原始课程资料（版权/隐私，禁止提交）
+*.ppt
+*.pptx
+*.pdf
+*.doc
+*.docx
+
+# 本地文档与 Claude Code 配置（不公开）
+info/
+.claude/

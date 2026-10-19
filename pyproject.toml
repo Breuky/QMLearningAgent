@@ -1,0 +1,16 @@
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.ruff.lint.per-file-ignores]
+# 环境变量 / sys.path 必须在导入应用模块前设置
+"tests/conftest.py" = ["E402"]
+"scripts/run_eval.py" = ["E402"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"

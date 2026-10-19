@@ -1,0 +1,130 @@
+[
+  {
+    "id": "ds-001",
+    "course_id": 1,
+    "category": "compare",
+    "question": "栈和队列的核心区别是什么？各自适合什么场景？",
+    "expected_sources": [
+      {"document": "数据结构-第3章-栈与队列.pptx", "page": 5}
+    ],
+    "reference_answer": "栈是后进先出（LIFO），只在栈顶插入和删除，适合函数调用、表达式求值、括号匹配；队列是先进先出（FIFO），队尾插入、队头删除，适合层次遍历、任务排队。",
+    "difficulty": "easy",
+    "split": "dev",
+    "notes": "文件名和页码为示例，需替换为实际上传资料"
+  },
+  {
+    "id": "ds-002",
+    "course_id": 1,
+    "category": "concept",
+    "question": "循环队列如何判断队空和队满？为什么要留一个空位？",
+    "expected_sources": [
+      {"document": "数据结构-第3章-栈与队列.pptx", "page": 18}
+    ],
+    "reference_answer": "常用 front == rear 判断队空；为区分队满，牺牲一个存储单元，用 (rear + 1) % maxsize == front 判断队满。也可以用计数器或标志位区分空和满。",
+    "difficulty": "medium",
+    "split": "dev",
+    "notes": ""
+  },
+  {
+    "id": "ds-003",
+    "course_id": 1,
+    "category": "code",
+    "question": "二叉树的前序、中序、后序遍历分别是什么顺序？给出一个简单例子。",
+    "expected_sources": [
+      {"document": "数据结构-第4章-树与二叉树.pptx", "page": 22}
+    ],
+    "reference_answer": "前序：根左右；中序：左根右；后序：左右根。对树 A(B(D,E),C(F))，前序为 ABDECF，中序为 DBEAFC，后序为 DEBFCA。",
+    "difficulty": "medium",
+    "split": "dev",
+    "notes": "以课程使用的术语为准"
+  },
+  {
+    "id": "ds-004",
+    "course_id": 1,
+    "category": "complexity",
+    "question": "快速排序的平均时间复杂度和最坏时间复杂度分别是多少？最坏情况在什么条件下出现？",
+    "expected_sources": [
+      {"document": "数据结构-第8章-排序.pptx", "page": 30}
+    ],
+    "reference_answer": "平均 O(n log n)，最坏 O(n^2)；当每趟划分极不均衡（如已有序且固定选端点为基准）时出现最坏情况。",
+    "difficulty": "medium",
+    "split": "dev",
+    "notes": ""
+  },
+  {
+    "id": "ds-005",
+    "course_id": 1,
+    "category": "concept",
+    "question": "哈希表处理冲突有哪些常见方法？开放定址法和链地址法有什么区别？",
+    "expected_sources": [
+      {"document": "数据结构-第6章-查找.pptx", "page": 9}
+    ],
+    "reference_answer": "常见方法有开放定址法（线性探测、二次探测、双散列）和链地址法。开放定址法在表内寻找下一个空位，删除需要标记；链地址法把同义词组织成链表，删除方便，但需要额外指针空间。",
+    "difficulty": "medium",
+    "split": "held-out",
+    "notes": ""
+  },
+  {
+    "id": "os-001",
+    "course_id": 2,
+    "category": "concept",
+    "question": "产生死锁的四个必要条件是什么？",
+    "expected_sources": [
+      {"document": "操作系统-第3章-调度与死锁.pptx", "page": 20}
+    ],
+    "reference_answer": "互斥、请求并保持、不可剥夺、循环等待。四个条件同时成立才可能死锁，破坏其中任一条件即可预防死锁。",
+    "difficulty": "easy",
+    "split": "dev",
+    "notes": ""
+  },
+  {
+    "id": "os-002",
+    "course_id": 2,
+    "category": "compare",
+    "question": "进程和线程有什么区别？为什么引入线程？",
+    "expected_sources": [
+      {"document": "操作系统-第2章-进程与线程.pptx", "page": 8}
+    ],
+    "reference_answer": "进程是资源分配的基本单位，拥有独立地址空间；线程是 CPU 调度的基本单位，同一进程内的线程共享地址空间和资源，但各自有栈和寄存器状态。引入线程是为了降低切换和通信开销，提高并发度。",
+    "difficulty": "easy",
+    "split": "dev",
+    "notes": ""
+  },
+  {
+    "id": "os-003",
+    "course_id": 2,
+    "category": "reasoning",
+    "question": "比较先来先服务和短作业优先调度算法的优缺点。短作业优先一定更好吗？",
+    "expected_sources": [
+      {"document": "操作系统-第3章-调度与死锁.pptx", "page": 6}
+    ],
+    "reference_answer": "FCFS 实现简单、公平，但平均等待时间可能较长，且不利于短作业；SJF 平均等待时间通常更短，但需要预知运行时间，长作业可能饥饿，且不区分紧急程度。因此不能说一定更好，要结合场景。",
+    "difficulty": "medium",
+    "split": "dev",
+    "notes": "只评价算法性质，不要求具体数值计算"
+  },
+  {
+    "id": "os-004",
+    "course_id": 2,
+    "category": "reasoning",
+    "question": "LRU 页面置换算法的基本思想是什么？它的主要开销在哪里？",
+    "expected_sources": [
+      {"document": "操作系统-第4章-内存管理.pptx", "page": 26}
+    ],
+    "reference_answer": "LRU 淘汰最长时间未被访问的页面，依据局部性原理近似未来行为。实现需要记录访问顺序（链表、栈或时间戳），每次访问都要更新，硬件和软件开销较大；还需处理缺页后的页表更新。",
+    "difficulty": "medium",
+    "split": "held-out",
+    "notes": "MVP 不要求计算具体置换序列"
+  },
+  {
+    "id": "os-005",
+    "course_id": 2,
+    "category": "refusal",
+    "question": "本学期《操作系统》期末考试的具体时间和教室安排是什么？",
+    "expected_sources": [],
+    "reference_answer": "资料中不包含考试安排，应明确说明无法确定，并建议查看教务通知。",
+    "difficulty": "easy",
+    "split": "dev",
+    "notes": "拒答样例；Recall 统计跳过此题"
+  }
+]
