@@ -14,6 +14,8 @@ htmlcov/
 .vscode/
 .DS_Store
 .claude/
+.codebuddy/settings.local.json
+CODEBUDDY.local.md
 info/
 
 # 原始课程资料（版权/隐私，禁止提交）
